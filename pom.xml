@@ -68,6 +68,12 @@
             <artifactId>org.wso2.carbon.tenant.common</artifactId>
             <version>4.5.4</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.wso2.carbon.identity</groupId>
+            <artifactId>org.wso2.carbon.identity.notification.mgt.email</artifactId>
+            <version>5.1.1</version>
+        </dependency>
     </dependencies>
 
     <build>
