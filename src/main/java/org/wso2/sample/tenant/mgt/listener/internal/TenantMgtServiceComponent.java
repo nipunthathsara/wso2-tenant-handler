@@ -32,7 +32,6 @@ public class TenantMgtServiceComponent {
     private static Log log = LogFactory.getLog(TenantMgtServiceComponent.class);
 
     protected void activate(ComponentContext context) {
-        log.info("********************************************************");
         BundleContext bundleContext = context.getBundleContext();
         bundleContext.registerService(TenantMgtListener.class.getName(), new TenantHandler(), null);
     }

@@ -19,31 +19,23 @@ package org.wso2.sample.tenant.mgt.listener.impl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.wso2.carbon.identity.notification.mgt.NotificationManagementException;
-import org.wso2.carbon.identity.notification.mgt.bean.PublisherEvent;
 import org.wso2.carbon.stratos.common.listeners.TenantMgtListener;
 import org.wso2.carbon.stratos.common.beans.TenantInfoBean;
 import org.wso2.carbon.stratos.common.exception.StratosException;
-import org.wso2.sample.tenant.mgt.listener.util.EmailSendingUtil;
+import org.wso2.sample.tenant.mgt.listener.util.NotificationUtil;
 
+/**
+ * Created by nipun on Nov, 2017
+ */
 public class TenantHandler implements TenantMgtListener {
 
     private static Log log = LogFactory.getLog(TenantHandler.class);
 
     @Override
     public void onTenantCreate(TenantInfoBean tenantInfoBean) throws StratosException {
-
-        System.out.println("email: " + tenantInfoBean.getEmail() + "name" + tenantInfoBean.getFirstname() + tenantInfoBean.getLastname());
-        System.out.println("Admin: " + tenantInfoBean.getAdmin() + "domain: " + tenantInfoBean.getTenantDomain());
-
-        EmailSendingUtil emailSendingUtil = new EmailSendingUtil();
-        try {
-            PublisherEvent event = new PublisherEvent("mockeventname");
-            emailSendingUtil.sendMessage(event);
-        } catch (NotificationManagementException e){
-            System.out.println("error ******************");
-        }
-        // Any work to be performed after a tenant creation
+        NotificationUtil notificationUtil = new NotificationUtil(tenantInfoBean.getEmail()
+                ,tenantInfoBean.getAdmin(), tenantInfoBean.getTenantDomain());
+        notificationUtil.sendMail();
     }
 
     @Override
